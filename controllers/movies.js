@@ -24,13 +24,13 @@ module.exports.getMovies = (req, res, next) => {
 
 module.exports.deleteMovie = (req, res, next) => {
   Movie.findById(req.params.id)
-    .orFail(() => new NotFoundError('карточка не найдена'))
+    .orFail(() => new NotFoundError('фильм не найдена'))
     .then((movie) => {
       if (!movie.owner.equals(req.user._id)) {
         return next(new ForbiddenError('access denied'));
       }
       return movie.remove()
-        .then(() => res.status(200).send({ message: 'карточка удалена' }));
+        .then(() => res.status(200).send({ message: 'фильм удален' }));
     })
     .catch(next);
 };
