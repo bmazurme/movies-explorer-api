@@ -1,5 +1,6 @@
 # movies-explorer-api
 Backend
+![api](https://api.joinus.nomoredomains.xyz/)
 
 ### Установка
 Клонируйте репозиторий на компьютер:
