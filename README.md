@@ -1,6 +1,10 @@
 # movies-explorer-api
 Backend
-![api](https://api.joinus.nomoredomains.xyz/)
+
+[api](https://api.joinus.nomoredomains.xyz/)
+
+[pullrequest](https://github.com/bmazurme/movies-explorer-api/pull/1)
+
 
 ### Установка
 Клонируйте репозиторий на компьютер:
