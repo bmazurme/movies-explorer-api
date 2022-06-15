@@ -1,8 +1,14 @@
 const { celebrate, Joi } = require('celebrate');
 const { isValidObjectId } = require('mongoose');
+const validator = require('validator');
 const BadRequestError = require('../errors/BadRequestError');
 
-const EMAIL_URL = /^((http|https):\/\/)?(([A-Z0-9][A-Z0-9_-]*)(\.[A-Z0-9][A-Z0-9_-]*)+)/i;
+const checkUrl = (value, helpers) => {
+  if (validator.isURL(value)) {
+    return value;
+  }
+  return helpers.message('поле заполнено некорректно');
+};
 
 const StringRequired = Joi.string().required();
 
@@ -26,9 +32,10 @@ const validateMovieData = celebrate({
     description: Joi.string().min(2).max(200).required(),
     duration: Joi.number().required(),
     year: Joi.string().min(2).max(4).required(),
-    image: Joi.string().pattern(EMAIL_URL).required(),
-    trailerLink: Joi.string().pattern(EMAIL_URL).required(),
-    thumbnail: Joi.string().pattern(EMAIL_URL).required(),
+    image: Joi.string().required().custom(checkUrl),
+    trailerLink: Joi.string().required().custom(checkUrl),
+    thumbnail: Joi.string().required().custom(checkUrl),
+    movieId: Joi.number().required(),
   }),
 });
 
@@ -50,7 +57,7 @@ const validateRegistrData = celebrate({
   body: Joi.object().keys({
     name: Joi.string().min(2).max(30),
     about: Joi.string().min(2).max(30),
-    avatar: Joi.string().pattern(EMAIL_URL),
+    avatar: Joi.string().custom(checkUrl),
     email: Joi.string().required().email(),
     password: Joi.string().required(),
   }),

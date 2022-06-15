@@ -6,6 +6,12 @@ const NotFoundError = require('../errors/NotFoundError');
 const UnauthorizedError = require('../errors/UnauthorizedError');
 const ConflictError = require('../errors/ConflictError');
 
+const {
+  USER_NOT_FOUND_RU,
+  USER_BAD_REQUEST_RU,
+  USER_CONFLICT_RU,
+} = require('../utils/constErrors');
+
 module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
 
@@ -21,12 +27,12 @@ module.exports.login = (req, res, next) => {
         // .send({ message: 'Успешная авторизация' });
         .send({ token });
     })
-    .catch(() => next(new UnauthorizedError('авторизация с несуществующими email и password')));
+    .catch(() => next(new UnauthorizedError(USER_BAD_REQUEST_RU)));
 };
 
 module.exports.createUser = (req, res, next) => {
   const {
-    name = 'Name',
+    name,
     email,
     password,
   } = req.body;
@@ -44,12 +50,12 @@ module.exports.createUser = (req, res, next) => {
     }))
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        next(new BadRequestError());
+        return next(new BadRequestError());
       }
       if (err.code === 11000) {
-        next(new ConflictError('добавление пользователя с существующим email'));
+        return next(new ConflictError(USER_CONFLICT_RU));
       }
-      next(err);
+      return next(err);
     });
 };
 
@@ -57,14 +63,11 @@ module.exports.getCurrentUser = (req, res, next) => {
   User.findById(req.user._id)
     .then((user) => {
       if (!user) {
-        next(new NotFoundError('пользователь не найден'));
+        return next(new NotFoundError(USER_NOT_FOUND_RU));
       }
       return res.send(user);
     })
     .catch((err) => {
-      if (err.name === 'CastError') {
-        next(new BadRequestError());
-      }
       next(err);
     });
 };
@@ -84,14 +87,17 @@ module.exports.updateUser = (req, res, next) => {
   )
     .then((data) => {
       if (!data) {
-        next(new NotFoundError('пользователь не найден'));
+        return next(new NotFoundError(USER_NOT_FOUND_RU));
       }
-      return res.status(200).send(data);
+      return res.send(data);
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        next(new BadRequestError());
+        return next(new BadRequestError());
       }
-      next(err);
+      if (err.code === 11000) {
+        return next(new ConflictError(USER_CONFLICT_RU));
+      }
+      return next(err);
     });
 };
