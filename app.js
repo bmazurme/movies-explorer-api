@@ -13,7 +13,7 @@ const {
   requestLogger,
   errorLogger,
 } = require('./middlewares/logger');
-
+require('dotenv').config();
 // bitfilmsdb - по заданию, по коммент. moviesdb
 const { PORT = 3000, PTH = 'mongodb://localhost:27017/moviesdb' } = process.env;
 
