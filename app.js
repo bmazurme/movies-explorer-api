@@ -15,7 +15,7 @@ const {
 } = require('./middlewares/logger');
 
 // bitfilmsdb - по заданию, по коммент. moviesdb
-const { PORT = 3100, PTH = 'mongodb://localhost:27017/moviesdb' } = process.env;
+const { PORT = 3000, PTH = 'mongodb://localhost:27017/moviesdb' } = process.env;
 
 const app = express();
 
