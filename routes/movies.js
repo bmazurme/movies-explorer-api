@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const {
   validateMovieData,
-  validateObjectId,
+  // validateObjectId,
 } = require('../utils/validator');
 
 const {
@@ -20,7 +20,7 @@ router.get('/movies', getMovies);
 
 router.delete(
   '/movies/:id',
-  validateObjectId,
+  // validateObjectId,
   deleteMovie,
 );
 
