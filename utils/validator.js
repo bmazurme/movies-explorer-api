@@ -29,7 +29,7 @@ const validateMovieData = celebrate({
     nameEN: Joi.string().min(2).max(30).required(),
     country: Joi.string().min(2).max(30).required(),
     director: Joi.string().min(2).max(30).required(),
-    description: Joi.string().min(2).max(400).required(),
+    description: Joi.string().min(2).required(),
     duration: Joi.number().required(),
     year: Joi.string().min(2).max(4).required(),
     image: Joi.string().required().custom(checkUrl),
