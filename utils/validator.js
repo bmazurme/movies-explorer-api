@@ -25,10 +25,10 @@ const validateObjectId = celebrate({
 
 const validateMovieData = celebrate({
   body: Joi.object().keys({
-    nameRU: Joi.string().min(2).max(30).required(),
-    nameEN: Joi.string().min(2).max(30).required(),
-    country: Joi.string().min(2).max(30).required(),
-    director: Joi.string().min(2).max(30).required(),
+    nameRU: Joi.string().min(2).required(),
+    nameEN: Joi.string().min(2).required(),
+    country: Joi.string().min(2).required(),
+    director: Joi.string().min(2).required(),
     description: Joi.string().min(2).required(),
     duration: Joi.number().required(),
     year: Joi.string().min(2).max(4).required(),
