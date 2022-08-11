@@ -1,11 +1,19 @@
+
+# movies-explorer-api
+Backend
+
+[api](https://api.joinus.nomoredomains.xyz/)
+
 # Movies Explorer Project
 ## movies-explorer-api
+
 
 Performed tasks: creation of API, implementation of API schemas and models, routes and controllers, authorization of users, logging.
 
 #### Frontend [https://joinus.nomoredomains.xyz/](https://joinus.nomoredomains.xyz/)
 #### Backend [https://api.joinus.nomoredomains.xyz/](https://api.joinus.nomoredomains.xyz/)
 #### Frontend Git [https://github.com/bmazurme/movies-explorer-frontend](https://github.com/bmazurme/movies-explorer-frontend)
+
 
 ### Установка
 Клонируйте репозиторий на компьютер:
